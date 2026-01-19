@@ -80,23 +80,29 @@
             </div>
 
             <div class="space-y-6">
-                <#list posts.content as post>
-                <article class="news-item p-6 bg-white rounded-lg border border-neutral-100 hover:shadow-md transition-all duration-300">
-                    <div class="flex flex-col gap-3">
-                        <div class="flex items-start justify-between gap-4">
-                            <h2 class="text-xl font-serif font-semibold text-primary hover:text-accent transition-colors">
-                                <a href="${post.status.permalink}">${post.title}</a>
-                            </h2>
-                            <span class="news-date text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded whitespace-nowrap">
-                                ${post.publishTime?string('yyyy-MM-dd')}
-                            </span>
+                <#if posts?? && posts.content?? && posts.content?size gt 0>
+                    <#list posts.content as post>
+                    <article class="news-item p-6 bg-white rounded-lg border border-neutral-100 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-start justify-between gap-4">
+                                <h2 class="text-xl font-serif font-semibold text-primary hover:text-accent transition-colors">
+                                    <a href="${post.status.permalink}">${post.title}</a>
+                                </h2>
+                                <span class="news-date text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded whitespace-nowrap">
+                                    ${post.publishTime?string('yyyy-MM-dd')}
+                                </span>
+                            </div>
+                            <#if post.excerpt??>
+                            <p class="text-neutral-600 text-sm">${post.excerpt}</p>
+                            </#if>
                         </div>
-                        <#if post.excerpt??>
-                        <p class="text-neutral-600 text-sm">${post.excerpt}</p>
-                        </#if>
+                    </article>
+                    </#list>
+                <#else>
+                    <div class="text-center py-12">
+                        <p class="text-neutral-500">此分类暂无内容 / No content in this category yet</p>
                     </div>
-                </article>
-                </#list>
+                </#if>
             </div>
 
             <!-- Pagination -->

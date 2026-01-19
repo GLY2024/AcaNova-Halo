@@ -32,6 +32,7 @@ spec:
           label: 电子邮件
           value: "your.email@example.com"
           validation: required|email
+          help: "请将此示例邮箱替换为您的常用邮箱 / Please replace this example email with your actual email"
         - $formkit: attachment
           name: profile_image
           label: 个人照片
