@@ -103,7 +103,7 @@
                     <div class="profile-card sticky top-24">
                         <!-- Profile Image -->
                         <div class="profile-image-container mb-6 mx-auto max-w-[180px]">
-                            <img src="${settings.profile_image!theme.assets + '/profile.jpg'}" id="profile-img" alt="${settings.user_name!'Your Name'}" class="w-full h-auto rounded-xl shadow-sm bg-gray-200">
+                            <img src="${settings.profile_image!'${theme.assets}/profile.jpg'}" id="profile-img" alt="${settings.user_name!'Your Name'}" class="w-full h-auto rounded-xl shadow-sm bg-gray-200">
                         </div>
 
                         <!-- Name and Title -->

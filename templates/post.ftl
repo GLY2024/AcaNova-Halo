@@ -76,8 +76,9 @@
                 <header class="mb-8 pb-6 border-b border-neutral-200">
                     <h1 class="text-4xl font-serif font-bold text-primary mb-4">${post.title!}</h1>
                     <div class="flex items-center gap-4 text-sm text-neutral-500">
-                        <time datetime="${post.publishTime?string('yyyy-MM-dd')}">
-                            <i class="fas fa-calendar-alt mr-2"></i>${post.publishTime?string('yyyy-MM-dd')}
+                        <#assign publishDate = post.publishTime?string('yyyy-MM-dd')>
+                        <time datetime="${publishDate}">
+                            <i class="fas fa-calendar-alt mr-2"></i>${publishDate}
                         </time>
                         <#if post.categories?? && post.categories?size gt 0>
                         <span>

@@ -35,8 +35,7 @@ spec:
         - $formkit: attachment
           name: profile_image
           label: 个人照片
-          value: "/assets/profile.jpg"
-          validation: required
+          help: "推荐尺寸：400x400 像素，正方形"
         - $formkit: textarea
           name: bio
           label: 个人简介

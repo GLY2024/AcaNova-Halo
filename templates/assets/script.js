@@ -84,10 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Load news data
-    let newsJsonPath = 'data/news.json';
-    if (window.location.pathname.includes('/pages/')) {
-        newsJsonPath = '../data/news.json';
-    }
+    const newsJsonPath = window.dataPath?.news || 'data/news.json';
     
     fetch(newsJsonPath)
         .then(response => response.json())
@@ -111,10 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
     // Load honors data
-    let honorsJsonPath = 'data/honors.json';
-    if (window.location.pathname.includes('/pages/')) {
-        honorsJsonPath = '../data/honors.json';
-    }
+    const honorsJsonPath = window.dataPath?.honors || 'data/honors.json';
     
     fetch(honorsJsonPath)
         .then(response => response.json())
@@ -140,10 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to load publications from JSON
 function loadPublications() {
-    let publicationsJsonPath = 'data/publications.json';
-    if (window.location.pathname.includes('/pages/')) {
-        publicationsJsonPath = '../data/publications.json';
-    }
+    const publicationsJsonPath = window.dataPath?.publications || 'data/publications.json';
 
     const publicationsList = document.querySelector('.publications-list');
     if (!publicationsList) {
