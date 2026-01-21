@@ -7,13 +7,13 @@ spec:
   author:
     name: Ethan & GLY2024
     website: https://github.com/GLY2024/AcaNova-Halo
-  description: 一个优雅的学术主页主题，适合研究人员、博士生和教师使用。支持发表论文展示、新闻动态、荣誉奖项等功能。An elegant academic homepage theme for researchers, PhD students, and faculty members.
+  description: 一个优雅的学术主页主题，适合研究人员、博士生和教师使用。支持多成员独立页面、发表论文展示、新闻动态、荣誉奖项等功能。An elegant academic homepage theme for researchers, PhD students, and faculty members. Supports multi-member pages.
   homepage: https://github.com/GLY2024/AcaNova-Halo
   logo: https://raw.githubusercontent.com/GLY2024/AcaNova-Halo/main/docs/part1.png
   repo: https://github.com/GLY2024/AcaNova-Halo
   settingName: theme-acanova-settings
   configMapName: theme-acanova-configmap
-  version: 1.0.0
+  version: 1.1.0
   require: ">=2.10.0"
   license:
     - name: MIT

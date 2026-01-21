@@ -5,6 +5,42 @@ All notable changes to the AcaNova-Halo theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-01-21
+
+### Added
+- **Multi-member support**: New page template system for creating individual member academic homepages
+- `page_member.ftl` - Universal member page template that adapts based on member type
+- `page_member.yaml` - Custom field configuration for member pages with 6 field groups
+- `page_members_list.ftl` - Member list page template with filtering by member type
+- `MEMBER_GUIDE.md` - Comprehensive guide for using the multi-member feature
+- Support for 6 member types:
+  - Teacher/Professor (教师/教授)
+  - Postdoc (博士后)
+  - PhD Student (博士生)
+  - Master Student (硕士生)
+  - Alumni - Research (已毕业，仍在科研)
+  - Alumni - Career (已毕业，已离开科研)
+- Member-specific fields:
+  - Advisor information for students
+  - Recruiting information for faculty/postdoc
+  - Expected graduation for current students
+  - Career experience for alumni
+- Automatic display adaptation based on member type
+- Member type badges with color coding
+- Social links integration per member
+
+### Features
+- Each member can create and maintain their own page independently
+- Custom fields for personal info, research, education, career, and social links
+- Member pages are self-contained and don't affect theme homepage
+- Support for unlimited number of member pages
+- Members can use Markdown or rich text editor for content
+
+### Documentation
+- Added comprehensive member homepage usage guide (Chinese)
+- Updated README_CN.md with multi-member scenarios
+- Added examples for different member types
+
 ## [1.0.0] - 2026-01-19
 
 ### Added

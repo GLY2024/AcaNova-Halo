@@ -1,0 +1,198 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: page-member-fields
+spec:
+  forms:
+    - group: member_basic
+      label: 成员基本信息
+      formSchema:
+        - $formkit: select
+          name: member_type
+          label: 成员类型
+          value: "teacher"
+          options:
+            - label: 教师/教授
+              value: "teacher"
+            - label: 博士后
+              value: "postdoc"
+            - label: 博士生
+              value: "phd"
+            - label: 硕士生
+              value: "master"
+            - label: 已毕业（仍在科研）
+              value: "graduated_research"
+            - label: 已毕业（已离开科研）
+              value: "graduated_career"
+          validation: required
+          help: "选择成员的身份类型"
+        
+        - $formkit: text
+          name: member_name_cn
+          label: 姓名（中文）
+          validation: required
+          placeholder: "张三"
+        
+        - $formkit: text
+          name: member_name_en
+          label: 姓名（英文）
+          placeholder: "Zhang San"
+        
+        - $formkit: text
+          name: member_title
+          label: 职位/身份
+          placeholder: "教授 / 博士生 / Professor / PhD Student"
+        
+        - $formkit: attachment
+          name: member_photo
+          label: 个人照片
+          help: "推荐尺寸：400x400 像素，正方形"
+        
+        - $formkit: text
+          name: member_email
+          label: 电子邮件
+          validation: email
+          placeholder: "example@university.edu"
+        
+        - $formkit: text
+          name: member_office
+          label: 办公室地址
+          placeholder: "科研楼 A301"
+    
+    - group: member_academic
+      label: 学术信息
+      formSchema:
+        - $formkit: text
+          name: research_field
+          label: 研究领域
+          placeholder: "人工智能、计算机视觉"
+        
+        - $formkit: repeater
+          name: research_interests
+          label: 研究兴趣
+          value:
+            - interest: "兴趣方向 1"
+            - interest: "兴趣方向 2"
+          children:
+            - $formkit: text
+              name: interest
+              label: 研究兴趣
+        
+        - $formkit: text
+          name: advisor_name
+          label: 导师姓名
+          help: "适用于学生成员"
+          placeholder: "导师：李四 教授"
+        
+        - $formkit: text
+          name: advisor_link
+          label: 导师主页链接
+          help: "适用于学生成员"
+          placeholder: "https://example.com/lisi"
+    
+    - group: member_education
+      label: 教育背景
+      formSchema:
+        - $formkit: repeater
+          name: education_list
+          label: 教育经历
+          value:
+            - degree: "博士 / Ph.D."
+              university: "XX大学"
+              period: "2020 - 2024"
+              major: "计算机科学"
+          children:
+            - $formkit: text
+              name: degree
+              label: 学位
+              validation: required
+            - $formkit: text
+              name: university
+              label: 大学
+              validation: required
+            - $formkit: text
+              name: period
+              label: 时间段
+              validation: required
+            - $formkit: text
+              name: major
+              label: 专业/方向
+    
+    - group: member_career
+      label: 工作经历
+      formSchema:
+        - $formkit: repeater
+          name: career_list
+          label: 职业经历
+          help: "适用于已毕业成员"
+          children:
+            - $formkit: text
+              name: position
+              label: 职位
+              validation: required
+            - $formkit: text
+              name: company
+              label: 公司/机构
+              validation: required
+            - $formkit: text
+              name: period
+              label: 时间段
+              validation: required
+            - $formkit: textarea
+              name: description
+              label: 工作描述
+              rows: 2
+    
+    - group: member_social
+      label: 社交链接
+      formSchema:
+        - $formkit: text
+          name: google_scholar
+          label: Google Scholar
+          placeholder: "https://scholar.google.com/citations?user=xxx"
+        
+        - $formkit: text
+          name: github
+          label: GitHub
+          placeholder: "https://github.com/username"
+        
+        - $formkit: text
+          name: personal_website
+          label: 个人网站
+          placeholder: "https://yourwebsite.com"
+        
+        - $formkit: text
+          name: linkedin
+          label: LinkedIn
+          placeholder: "https://linkedin.com/in/username"
+        
+        - $formkit: text
+          name: orcid
+          label: ORCID
+          placeholder: "https://orcid.org/0000-0000-0000-0000"
+    
+    - group: member_status
+      label: 状态信息
+      formSchema:
+        - $formkit: radio
+          name: is_recruiting
+          label: 是否招收学生
+          help: "适用于教师和博士后"
+          value: false
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+        
+        - $formkit: textarea
+          name: recruiting_info
+          label: 招生/招聘信息
+          help: "如果招收学生，请填写具体信息"
+          rows: 3
+        
+        - $formkit: text
+          name: expected_graduation
+          label: 预计毕业时间
+          help: "适用于在读学生"
+          placeholder: "2025年6月"
