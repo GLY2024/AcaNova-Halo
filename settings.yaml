@@ -1,0 +1,261 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: theme-acanova-settings
+spec:
+  forms:
+    - group: basic
+      label: 基本设置
+      formSchema:
+        - $formkit: text
+          name: site_title
+          label: 网站标题
+          value: "Your Name - Academic Homepage"
+          validation: required
+        - $formkit: text
+          name: user_name
+          label: 姓名 (中英文)
+          value: "Your Name | 您的名字"
+          validation: required
+        - $formkit: text
+          name: user_role
+          label: 职位/角色
+          value: "Your Role / Position"
+          placeholder: "例如：Ph.D. Candidate / 博士研究生"
+        - $formkit: text
+          name: user_organization
+          label: 所属机构
+          value: "Your University / Organization"
+          placeholder: "例如：清华大学"
+        - $formkit: text
+          name: user_email
+          label: 电子邮件
+          value: "your.email@example.com"
+          validation: required|email
+          help: "请将此示例邮箱替换为您的常用邮箱 / Please replace this example email with your actual email"
+        - $formkit: attachment
+          name: profile_image
+          label: 个人照片
+          help: "推荐尺寸：400x400 像素，正方形"
+        - $formkit: textarea
+          name: bio
+          label: 个人简介
+          value: "This is your biography section. You can introduce your background, education, and current research focus here."
+          rows: 5
+        - $formkit: textarea
+          name: seeking_text
+          label: 招生/合作信息
+          value: "I am actively seeking collaborators/students. If you are interested in my work, please feel free to contact me."
+          rows: 3
+          help: "显示在简介下方的高亮框中"
+    
+    - group: research
+      label: 研究方向
+      formSchema:
+        - $formkit: textarea
+          name: research_vision
+          label: 研究愿景
+          value: "Your research vision statement goes here. Describe your high-level goals and the impact you hope to achieve with your work."
+          rows: 3
+        - $formkit: textarea
+          name: research_framework
+          label: 研究框架描述
+          value: "Describe your research methodology or framework here."
+          rows: 3
+        - $formkit: repeater
+          name: research_interests
+          label: 研究兴趣列表
+          value:
+            - interest: "Interest 1"
+            - interest: "Interest 2"
+            - interest: "Interest 3"
+          children:
+            - $formkit: text
+              name: interest
+              label: 研究兴趣
+              validation: required
+        - $formkit: repeater
+          name: research_directions
+          label: 具体研究方向
+          value:
+            - title: "Research Direction A"
+              icon: "fa-project-diagram"
+              description: "Description of your first research direction. Explain the challenges, your approach, and the significance of this area."
+            - title: "Research Direction B"
+              icon: "fa-brain"
+              description: "Description of your second research direction."
+          children:
+            - $formkit: text
+              name: title
+              label: 方向标题
+              validation: required
+            - $formkit: text
+              name: icon
+              label: Font Awesome 图标类名
+              value: "fa-star"
+              help: "例如：fa-brain, fa-project-diagram, fa-lightbulb"
+            - $formkit: textarea
+              name: description
+              label: 描述
+              rows: 3
+              validation: required
+    
+    - group: social
+      label: 社交链接
+      formSchema:
+        - $formkit: text
+          name: cv_link
+          label: CV/简历链接
+          placeholder: "https://example.com/cv.pdf"
+        - $formkit: text
+          name: google_scholar
+          label: Google Scholar
+          placeholder: "https://scholar.google.com/citations?user=xxx"
+        - $formkit: text
+          name: github
+          label: GitHub
+          placeholder: "https://github.com/username"
+        - $formkit: text
+          name: researchgate
+          label: ResearchGate
+          placeholder: "https://www.researchgate.net/profile/username"
+        - $formkit: text
+          name: blog
+          label: 个人博客
+          placeholder: "https://yourblog.com"
+        - $formkit: text
+          name: orcid
+          label: ORCID
+          placeholder: "https://orcid.org/0000-0000-0000-0000"
+        - $formkit: text
+          name: linkedin
+          label: LinkedIn
+          placeholder: "https://www.linkedin.com/in/username"
+    
+    - group: contact
+      label: 联系方式
+      formSchema:
+        - $formkit: text
+          name: office_location
+          label: 办公地址
+          value: "Your Office Location"
+        - $formkit: text
+          name: office_university
+          label: 办公所在大学
+          value: "University Name"
+        - $formkit: text
+          name: office_city
+          label: 城市/国家
+          value: "City, Country"
+    
+    - group: services
+      label: 学术服务
+      formSchema:
+        - $formkit: repeater
+          name: services_list
+          label: 服务列表
+          value:
+            - title: "Conference Reviewer"
+              organization: "CVPR, ICCV, ECCV, NeurIPS, ICLR"
+              icon: "fa-edit"
+              description: "Served as a program committee member and reviewer for top-tier computer vision and machine learning conferences since 2023."
+            - title: "Teaching Assistant"
+              organization: "Your University"
+              icon: "fa-chalkboard-teacher"
+              description: "Course: CS101 Introduction to Computer Science (Fall 2024)."
+          children:
+            - $formkit: text
+              name: title
+              label: 服务标题
+              validation: required
+            - $formkit: text
+              name: organization
+              label: 机构/会议
+              validation: required
+            - $formkit: text
+              name: icon
+              label: Font Awesome 图标
+              value: "fa-star"
+            - $formkit: textarea
+              name: description
+              label: 描述
+              rows: 2
+    
+    - group: education
+      label: 教育背景
+      formSchema:
+        - $formkit: repeater
+          name: education_list
+          label: 教育经历
+          value:
+            - degree: "Ph.D. in Computer Science"
+              university: "Your University"
+              period: "2023 - Present"
+              thesis: "Thesis: Advanced Topics in Artificial Intelligence"
+          children:
+            - $formkit: text
+              name: degree
+              label: 学位
+              validation: required
+            - $formkit: text
+              name: university
+              label: 大学
+              validation: required
+            - $formkit: text
+              name: period
+              label: 时间段
+              validation: required
+            - $formkit: text
+              name: thesis
+              label: 论文/专业
+    
+    - group: style
+      label: 样式设置
+      formSchema:
+        - $formkit: color
+          name: accent_color
+          label: 强调色
+          value: "#d4a562"
+        - $formkit: color
+          name: accent_dark
+          label: 强调色（深）
+          value: "#b88a4d"
+        - $formkit: select
+          name: profile_position
+          label: 个人信息卡片位置
+          value: "left"
+          options:
+            - label: 左侧（默认）
+              value: "left"
+            - label: 顶部
+              value: "top"
+        - $formkit: radio
+          name: show_news
+          label: 显示新闻板块
+          value: true
+          options:
+            - label: 显示
+              value: true
+            - label: 隐藏
+              value: false
+        - $formkit: number
+          name: news_display_count
+          label: 首页显示新闻数量
+          value: 5
+          min: 1
+          max: 20
+        - $formkit: radio
+          name: show_honors
+          label: 显示荣誉板块
+          value: true
+          options:
+            - label: 显示
+              value: true
+            - label: 隐藏
+              value: false
+        - $formkit: number
+          name: honors_display_count
+          label: 首页显示荣誉数量
+          value: 5
+          min: 1
+          max: 20

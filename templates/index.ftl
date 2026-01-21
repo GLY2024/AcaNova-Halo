@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${settings.site_title!'Academic Homepage'} - ${site.title!}</title>
+    <meta name="description" content="${settings.bio!'Academic Homepage'}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="${theme.assets!}/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: '#fefffe',
+              foreground: '#0f172a',
+              primary: '#1e293b',
+              accent: '${settings.accent_color!'#d4a562'}',
+              'accent-dark': '${settings.accent_dark!'#b88a4d'}',
+              muted: '#64748b',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Crimson Text', 'serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <@global.head />
+</head>
+<body class="bg-background text-foreground antialiased font-sans">
+    <!-- Top Navigation -->
+    <nav class="top-nav glass fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 lg:h-20">
+                <!-- Logo/Name -->
+                <div class="flex-shrink-0">
+                    <a href="${context!}" class="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200">
+                        ${settings.user_name!'Your Name'}
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <ul class="nav-links flex space-x-8">
+                            <li><a href="#homepage" class="nav-item">Homepage</a></li>
+                            <li><a href="#about" class="nav-item">About Me</a></li>
+                            <#if settings.show_news!true>
+                            <li><a href="#latest-news" class="nav-item">News</a></li>
+                            </#if>
+                            <li><a href="#publications" class="nav-item">Publications</a></li>
+                            <#if settings.show_honors!true>
+                            <li><a href="#honors" class="nav-item">Honors</a></li>
+                            </#if>
+                            <li><a href="#services" class="nav-item">Service</a></li>
+                            <li><a href="#educations" class="nav-item">Education</a></li>
+                            <li><a href="#contact" class="nav-item">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button class="mobile-menu-btn p-2 rounded-md text-neutral-600 hover:text-primary">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="mobile-menu hidden lg:hidden absolute top-16 left-0 w-full bg-white/95 backdrop-blur-md border-b border-neutral-200 shadow-lg" id="mobile-menu">
+                <ul class="flex flex-col py-4 px-4 space-y-4">
+                    <li><a href="#homepage" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">Homepage</a></li>
+                    <li><a href="#about" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">About Me</a></li>
+                    <#if settings.show_news!true>
+                    <li><a href="#latest-news" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">News</a></li>
+                    </#if>
+                    <li><a href="#publications" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">Publications</a></li>
+                    <#if settings.show_honors!true>
+                    <li><a href="#honors" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">Honors</a></li>
+                    </#if>
+                    <li><a href="#services" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">Service</a></li>
+                    <li><a href="#educations" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">Education</a></li>
+                    <li><a href="#contact" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Grid -->
+    <main class="min-h-screen pt-20 lg:pt-28 pb-12">
+        <div class="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid-layout">
+                
+                <!-- Left Column - Profile (Sticky) -->
+                <div class="profile-column">
+                    <div class="profile-card sticky top-24">
+                        <!-- Profile Image -->
+                        <div class="profile-image-container mb-6 mx-auto max-w-[180px]">
+                            <img src="${settings.profile_image!'${theme.assets}/profile.jpg'}" id="profile-img" alt="${settings.user_name!'Your Name'}" class="w-full h-auto rounded-xl shadow-sm bg-gray-200">
+                        </div>
+
+                        <!-- Name and Title -->
+                        <div class="text-center mb-6">
+                            <h1 class="text-3xl font-serif font-bold text-primary mb-2">${settings.user_name!'Your Name | 您的名字'}</h1>
+                            <p class="text-lg text-accent font-medium mb-1">${settings.user_role!'Your Role / Position'}</p>
+                            <p class="text-neutral-600 mb-2">${settings.user_organization!'Your University / Organization'}</p>
+                        </div>
+
+                        <!-- Contact Links -->
+                        <div class="social-links flex flex-wrap justify-center gap-3 mb-6">
+                            <a href="mailto:${settings.user_email!'your.email@example.com'}" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                            <#if settings.cv_link??>
+                            <a href="${settings.cv_link}" target="_blank" class="social-btn" title="CV"><i class="fas fa-file-pdf"></i></a>
+                            </#if>
+                            <#if settings.google_scholar??>
+                            <a href="${settings.google_scholar}" target="_blank" class="social-btn" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                            </#if>
+                            <#if settings.github??>
+                            <a href="${settings.github}" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                            </#if>
+                            <#if settings.researchgate??>
+                            <a href="${settings.researchgate}" target="_blank" class="social-btn" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+                            </#if>
+                            <#if settings.blog??>
+                            <a href="${settings.blog}" target="_blank" class="social-btn" title="Blog"><i class="fas fa-blog"></i></a>
+                            </#if>
+                            <#if settings.orcid??>
+                            <a href="${settings.orcid}" target="_blank" class="social-btn" title="ORCID"><i class="fab fa-orcid"></i></a>
+                            </#if>
+                            <#if settings.linkedin??>
+                            <a href="${settings.linkedin}" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            </#if>
+                        </div>
+                        
+                        <!-- Research Interests -->
+                         <div class="research-interests-card bg-neutral-100 rounded-xl p-5 mb-6">
+                            <h3 class="font-serif font-bold text-lg text-primary mb-4 pb-2 border-b border-neutral-200 flex items-center">
+                                <i class="fas fa-lightbulb text-accent mr-2 text-base"></i> Research Interests
+                            </h3>
+                            <ul class="space-y-3">
+                                <#if settings.research_interests??>
+                                    <#list settings.research_interests as interest>
+                                    <li class="flex items-center text-neutral-700 hover:text-primary transition-colors">
+                                        <i class="fas fa-star text-accent/80 mr-3 w-5 text-center text-sm"></i>
+                                        <span class="text-sm font-medium">${interest.interest!}</span>
+                                    </li>
+                                    </#list>
+                                <#else>
+                                    <li class="flex items-center text-neutral-700 hover:text-primary transition-colors">
+                                        <i class="fas fa-star text-accent/80 mr-3 w-5 text-center text-sm"></i>
+                                        <span class="text-sm font-medium">Interest 1</span>
+                                    </li>
+                                    <li class="flex items-center text-neutral-700 hover:text-primary transition-colors">
+                                        <i class="fas fa-star text-accent/80 mr-3 w-5 text-center text-sm"></i>
+                                        <span class="text-sm font-medium">Interest 2</span>
+                                    </li>
+                                    <li class="flex items-center text-neutral-700 hover:text-primary transition-colors">
+                                        <i class="fas fa-star text-accent/80 mr-3 w-5 text-center text-sm"></i>
+                                        <span class="text-sm font-medium">Interest 3</span>
+                                    </li>
+                                </#if>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Column - Content -->
+                <div class="content-column space-y-12">
+                    
+                    <!-- About Section -->
+                    <section id="homepage" class="scroll-mt-24">
+                        <span id="about"></span> <!-- Anchor for About link -->
+                        <div class="section-header mb-6">
+                            <h2 class="text-3xl font-serif font-bold text-primary">About Me</h2>
+                        </div>
+                        <div class="prose max-w-none text-neutral-600 text-justify formal-font">
+                            <p class="mb-4">${settings.bio!'This is your biography section. You can introduce your background, education, and current research focus here.'}</p>
+                            
+                            <#if settings.seeking_text??>
+                            <div class="highlight-box bg-accent/10 border-l-4 border-accent p-4 rounded-r-lg text-left font-sans">
+                                <p><strong><i class="fas fa-lightbulb text-accent mr-2"></i>${settings.seeking_text!}</strong> <#if settings.user_email??>Please contact me via email: <a href="mailto:${settings.user_email}" class="link-highlight">${settings.user_email}</a>.</#if></p>
+                            </div>
+                            </#if>
+                        </div>
+                    </section>
+
+                    <!-- Research Thrust Section -->
+                    <section id="research-thrust" class="scroll-mt-24">
+                        <div class="section-header mb-6">
+                            <h2 class="text-3xl font-serif font-bold text-primary">🚀 Research Thrust</h2>
+                        </div>
+                        <div class="prose max-w-none text-neutral-600 text-justify formal-font">
+                            <#if settings.research_vision??>
+                            <blockquote class="pl-4 border-l-4 border-accent/30 italic text-neutral-600 bg-neutral-50/50 p-4 rounded-r-lg mb-6">
+                                "${settings.research_vision}"
+                            </blockquote>
+                            </#if>
+                            
+                            <#if settings.research_framework??>
+                            <p class="mb-8">${settings.research_framework}</p>
+                            </#if>
+
+                            <#if settings.research_directions?? && (settings.research_directions?size > 0)>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <#list settings.research_directions as direction>
+                                <!-- Thrust ${direction?index + 1} -->
+                                <div class="thrust-card bg-neutral-50 rounded-xl p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 group flex flex-col h-full">
+                                    <h3 class="font-serif font-bold text-lg text-primary mb-4 flex items-center group-hover:text-accent transition-colors">
+                                        <i class="fas ${direction.icon!'fa-star'} text-accent mr-2 group-hover:scale-110 transition-transform"></i> ${direction.title!'Research Direction'}
+                                    </h3>
+                                    <p class="text-sm leading-relaxed text-justify text-neutral-600 flex-grow">
+                                        ${direction.description!'Description of research direction.'}
+                                    </p>
+                                </div>
+                                </#list>
+                            </div>
+                            </#if>
+                        </div>
+                    </section>
+
+                    <!-- News Section -->
+                    <#if settings.show_news!true>
+                    <section id="latest-news" class="scroll-mt-24">
+                        <div class="section-header mb-6 flex justify-between items-center">
+                            <h2 class="text-3xl font-serif font-bold text-primary">🔥 News</h2>
+                            <a href="${context!}/archives" class="text-sm font-medium text-accent hover:text-accent-dark transition-colors">View All <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                        <div id="news-container" class="news-list space-y-4">
+                            <#list posts.content as post>
+                                <#if post?index < (settings.news_display_count!5)>
+                                <div class="news-item p-4 bg-white rounded-lg border border-neutral-100 hover:shadow-md transition-all duration-300">
+                                    <div class="flex items-start gap-3">
+                                        <span class="news-date text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded whitespace-nowrap">
+                                            ${post.publishTime?string('yyyy-MM-dd')}
+                                        </span>
+                                        <div class="flex-1">
+                                            <a href="${post.status.permalink}" class="news-title font-medium text-neutral-700 hover:text-primary transition-colors">
+                                                ${post.title}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </#if>
+                            </#list>
+                        </div>
+                    </section>
+                    </#if>
+
+                    <!-- Publications Section -->
+                    <section id="publications" class="scroll-mt-24">
+                        <div class="section-header mb-6">
+                            <h2 class="text-3xl font-serif font-bold text-primary">📄 Publications</h2>
+                            <p class="text-sm text-neutral-500 mt-1">(* means equal contribution)</p>
+                        </div>
+                        
+                        <div class="publications-list space-y-6">
+                            <!-- Content will be loaded from JSON via JavaScript -->
+                            <!-- This maintains compatibility with the original template -->
+                        </div>
+                    </section>
+
+                    <!-- Honors Section -->
+                    <#if settings.show_honors!true>
+                    <section id="honors" class="scroll-mt-24">
+                        <div class="section-header mb-6 flex justify-between items-center">
+                            <h2 class="text-3xl font-serif font-bold text-primary">🏆 Honors & Awards</h2>
+                            <a href="${context!}/categories/honors" class="text-sm font-medium text-accent hover:text-accent-dark transition-colors">View All <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                        <div id="honors-container" class="honors-list space-y-4">
+                            <!-- Content will be loaded from JSON via JavaScript -->
+                        </div>
+                    </section>
+                    </#if>
+
+                    <!-- Academic Service Section -->
+                    <section id="services" class="scroll-mt-24">
+                        <div class="section-header mb-6">
+                            <h2 class="text-3xl font-serif font-bold text-primary">💼 Academic Service</h2>
+                        </div>
+                        <div class="timeline space-y-6">
+                            <#if settings.services_list??>
+                                <#list settings.services_list as service>
+                                <div class="timeline-item flex gap-4">
+                                    <div class="school-logo-container w-16 h-16 flex-shrink-0 bg-white rounded-lg shadow-sm p-2 flex items-center justify-center border border-neutral-100 text-2xl text-accent">
+                                        <i class="fas ${service.icon!'fa-star'}"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3 class="font-semibold text-primary">${service.title!'Service'}</h3>
+                                        <p class="text-sm text-accent font-medium">${service.organization!''}</p>
+                                        <#if service.description??>
+                                        <p class="text-sm text-neutral-600 mt-1 leading-relaxed">
+                                            ${service.description}
+                                        </p>
+                                        </#if>
+                                    </div>
+                                </div>
+                                </#list>
+                            </#if>
+                        </div>
+                    </section>
+
+                    <!-- Education Section -->
+                    <section id="educations" class="scroll-mt-24">
+                         <div class="section-header mb-6">
+                            <h2 class="text-3xl font-serif font-bold text-primary">🎓 Education</h2>
+                        </div>
+                        <div class="timeline space-y-6">
+                            <#if settings.education_list??>
+                                <#list settings.education_list as edu>
+                                <div class="timeline-item flex gap-4">
+                                    <div class="school-logo-container w-16 h-16 flex-shrink-0 bg-white rounded-lg shadow-sm p-2 flex items-center justify-center border border-neutral-100">
+                                         <i class="fas fa-graduation-cap text-3xl text-neutral-300"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3 class="font-semibold text-primary">${edu.degree!'Degree'}</h3>
+                                        <p class="text-sm text-accent font-medium">${edu.university!'University'}</p>
+                                        <p class="text-sm text-neutral-500">${edu.period!'Period'}</p>
+                                        <#if edu.thesis??>
+                                        <p class="text-sm text-neutral-600 mt-1">
+                                            ${edu.thesis}
+                                        </p>
+                                        </#if>
+                                    </div>
+                                </div>
+                                </#list>
+                            </#if>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section id="contact" class="scroll-mt-24 mb-12">
+                         <div class="section-header mb-6">
+                            <h2 class="text-3xl font-serif font-bold text-primary">📬 Contact</h2>
+                        </div>
+                         <div class="contact-card bg-neutral-50 rounded-xl p-6 border border-neutral-100">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h3 class="font-serif font-bold text-lg text-primary mb-3">Contact Information</h3>
+                                    <ul class="space-y-3 text-neutral-600">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-envelope mt-1 w-5 text-accent"></i>
+                                            <span class="ml-2">${settings.user_email!'your.email@example.com'}</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-map-marker-alt mt-1 w-5 text-accent"></i>
+                                            <span class="ml-2">${settings.office_location!'Your Office Location'}<br>${settings.office_university!'University Name'}<br>${settings.office_city!'City, Country'}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-neutral-200 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-neutral-500 text-sm">
+                &copy; ${.now?string('yyyy')} ${settings.user_name!'Your Name'}. All rights reserved. <br>
+                Powered by <a href="https://halo.run" target="_blank" class="text-accent hover:text-accent-dark">Halo</a> | Theme: <a href="https://github.com/GLY2024/AcaNova-Halo" class="text-accent hover:text-accent-dark">AcaNova</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="${theme.assets!}/script.js"></script>
+    <script>
+        // Set data paths for publications and honors JSON files
+        window.dataPath = {
+            publications: '${theme.assets!}/data/publications.json',
+            honors: '${theme.assets!}/data/honors.json',
+            news: '${theme.assets!}/data/news.json'
+        };
+    </script>
+</body>
+</html>
